@@ -45,7 +45,6 @@ try {
     console.error('Algo deu errado');
 }
 
-console.log(`Saldo final: R$${transacao.saldo.toFixed(2)}`);
 
 /*
 Crie um programa para cadastrar, listar e excluir produtos de uma

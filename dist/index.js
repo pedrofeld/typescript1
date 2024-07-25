@@ -31,11 +31,19 @@ const transacao = {
     transacoes: 0,
 };
 try {
-    (0, funcoes_1.movimentarCarteira)(transacao, 1000); // entrada de R$1000
-    (0, funcoes_1.movimentarCarteira)(transacao, -500); // saída de R$500
-    (0, funcoes_1.movimentarCarteira)(transacao, -10000); // saldo insuficiente, deve gerar erro
+    (0, funcoes_1.movimentarCarteira)(transacao, 1000); // entrada de R$1000 (positivo)
+    (0, funcoes_1.movimentarCarteira)(transacao, -500); // saída de R$500 (negativo)
+    (0, funcoes_1.movimentarCarteira)(transacao, -10000); // saldo insuficiente, deve gerar erro (negativo mto alto)
 }
 catch (error) {
     console.error('Algo deu errado');
 }
-console.log(`Saldo final: R$${transacao.saldo.toFixed(2)}`);
+/*
+Crie um programa para cadastrar, listar e excluir produtos de uma
+lista com tipagem de Produto.
+*/
+console.log("-----------Atividade 04----------");
+const caderno = {
+    nomeProduto: "caderno de 96 folhas",
+    quantidade: 100,
+};
