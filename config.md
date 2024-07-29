@@ -6,3 +6,5 @@
 
 - trocar o ano do target no doc tsconfig.json
 - trocar caminho das pastas de "main" do package.json para "dist/index.js"
+
+void na função significa que ela não tem retorno (não possui return)

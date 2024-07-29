@@ -1,12 +1,15 @@
+import { Carteira, Produtos, Usuario, UsuarioDiretor, Pessoa } from "./interface";
+
 // Atividade 01
 
 export function media(a: number, b: number): { media: number, aprovado: boolean } {
+    // entre parênteses são os parâmetros que a função utiliza e entre chaves são os objetos retornados pela função
     const nota = (a + b) / 2;
 
     const aprovado = (nota >= 6);
 
     console.log("A média do aluno é " + nota);
-    console.log(`O aluno está ${aprovado ? 'aprovado' : 'reprovado'}`);
+    console.log(`O aluno está ${aprovado ? 'aprovado' : 'reprovado'}`); // critério ? true : false
 
     return {
         media: nota,
@@ -23,8 +26,6 @@ export function media2 (a: number, b: number, c: number, aa: number, ba: number,
 }
 
 // Atividade 03
-
-import { Carteira } from "./interface";
 
 export function movimentarCarteira(carteira: Carteira, valor: number): void {
 
@@ -53,7 +54,111 @@ export function movimentarCarteira(carteira: Carteira, valor: number): void {
 
 // Atividade 04
 
-/*
-Crie um programa para cadastrar, listar e excluir produtos de uma
-lista com tipagem de Produto.
-*/
+export let produtos: Produtos[] = []
+export let proximoId: number = 1
+
+export function cadastrarProduto(nomeProduto: string, quantidade: number): void{
+    console.log('Cadastro de produto')
+
+    const novoProduto: Produtos = {
+        id: proximoId++,
+        nomeProduto: nomeProduto,
+        quantidade: quantidade,
+    }
+
+    produtos.push(novoProduto);
+
+    console.log(`Produto ${nomeProduto} cadastrado!`)
+}
+
+export function listarProdutos(): void {
+  console.log("Lista de Produtos:");
+  produtos.forEach((produto) => {
+    console.log(`ID: ${produto.id}, Nome: ${produto.nomeProduto}, Quantidade: ${produto.quantidade}`);
+  });
+}
+
+export function excluirProduto(id: number): void{
+    console.log('Exclusão de produto')
+
+    const index = produtos.findIndex((produto) => produto.id === id)
+
+    if (index !== -1){
+        const produtoExcluido = produtos.splice(index, 1)[0]
+        console.log(`Produto ${produtoExcluido.nomeProduto} excluído!`)
+    } else{
+        console.log(`Produto com ID ${id} não encontrado`)
+    }
+}
+
+// Atividade 05
+
+export let usuarios: Usuario[] = []
+export let pessoas: Pessoa[] = []
+
+export function cadastrarUsuario (nome: string, idade: number, ocupacao: string, salario?: number): void{
+    console.log('Cadastro de usuário')
+
+    const novoUsuario: Usuario = {
+        nome: nome,
+        idade: idade, 
+        ocupacao: ocupacao,
+        salario: salario,
+    }
+
+    usuarios.push(novoUsuario);
+    pessoas.push(novoUsuario);
+
+    console.log(`Usuário ${nome} cadastrado!`)
+}
+
+export function listarUsuarios(): void {
+    console.log("Lista de usuários:");
+    usuarios.forEach((usuario) => {
+        const valorSalario = usuario.salario !== undefined ? `R$${usuario.salario}` : "N/A"
+      console.log(`${usuario.nome}, ${usuario.idade} anos, ${usuario.ocupacao}, salário ${valorSalario}`);
+    });
+}
+
+// Atividade 06
+
+export let diretores: UsuarioDiretor[] = []
+
+export function cadastrarUsuarioDiretor (nomeDiretor: string, idadeDiretor: number, nivelComissionamento: number, salarioDiretor?: number): void{
+    console.log('Cadastro de diretores')
+
+    const novoUsuarioDiretor: UsuarioDiretor = {
+        nomeDiretor: nomeDiretor,
+        idadeDiretor: idadeDiretor, 
+        salarioDiretor: salarioDiretor,
+        nivelComissionamento: nivelComissionamento,
+    }
+
+    diretores.push(novoUsuarioDiretor);
+    pessoas.push(novoUsuarioDiretor);
+
+    console.log(`Diretor(a) ${nomeDiretor} cadastrado!`)
+}
+
+export function listarDiretores(): void {
+    console.log("Lista de diretores");
+    diretores.forEach((diretores) => {
+        const valorSalarioDiretor = diretores.salarioDiretor !== undefined ? `R$${diretores.salarioDiretor}` : "N/A"
+      console.log(`Diretor(a) ${diretores.nomeDiretor}, ${diretores.idadeDiretor} anos, comissão nível ${diretores.nivelComissionamento}, salário ${valorSalarioDiretor}`);
+    });
+}
+
+// Atividade 07
+
+export function listarPessoas(): void {
+    console.log("Lista de pessoas:");
+    pessoas.forEach((pessoa) => {
+      if ('nome' in pessoa) { //se for pessoa
+        const valorSalario = pessoa.salario !== undefined ? `R$${pessoa.salario}` : 'N/A';
+        console.log(`${pessoa.nome}, ${pessoa.idade} anos, ${pessoa.ocupacao}, salário ${valorSalario}`);
+      } else { // se for diretor
+        const valorSalarioDiretor = pessoa.salarioDiretor !== undefined ? `R$${pessoa.salarioDiretor}` : 'N/A';
+        console.log(`Diretor(a) ${pessoa.nomeDiretor}, ${pessoa.idadeDiretor} anos, comissão nível ${pessoa.nivelComissionamento}, salário ${valorSalarioDiretor}`);
+      }
+    });
+  }
