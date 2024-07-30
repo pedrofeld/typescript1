@@ -11,4 +11,11 @@ Dentro do arquivo tsconfing.json, ajustar as seguintes propriedades:
 "outDir": Apontar o caminho onde os arquivo transpilados javascript vão ser destinados. "./dist" - criar uma pasta na raiz chamada dist
 "exclude": ["node_modules"]: Garante que não vai transpilar a node modules.
 
+no arquivo package.json:
+- trocar caminho da main para "dist/index.js"
+- adicionar scripts:
+    "start": "node ./dist/index.js",
+    "build": "tsc",
+    "dev": "ts-node-dev --respawn --transpile-only ./src/index.ts"
+
 void na função significa que ela não tem retorno (não possui return)
